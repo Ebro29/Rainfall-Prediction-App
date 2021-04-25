@@ -1,0 +1,125 @@
+[System]
+Name='RainfallPredictor'
+Type='mamdani'
+Version=2.0
+NumInputs=5
+NumOutputs=1
+NumRules=53
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Temperature'
+Range=[0 120]
+NumMFs=5
+MF1='Very_Cold':'trimf',[-30 -4.441e-16 30]
+MF2='Cold':'trimf',[0 30 60]
+MF3='Normal':'trimf',[30 60 90]
+MF4='Hot':'trimf',[60 90 120]
+MF5='Very_Hot':'trimf',[90 120 150]
+
+[Input2]
+Name='Humidity(In_Percentage)'
+Range=[0 100]
+NumMFs=3
+MF1='Low':'trimf',[-40 0 40]
+MF2='Medium':'trimf',[10 50 90]
+MF3='High':'trimf',[60 100 140]
+
+[Input3]
+Name='Pressure(in_bars)'
+Range=[990 1060]
+NumMFs=5
+MF1='Very_Low_Pressure':'trimf',[972.5 990 1008]
+MF2='Low_Pressure':'trimf',[990 1008 1025]
+MF3='Normal_Pressure':'trimf',[1008 1025 1043]
+MF4='High_Pressure':'trimf',[1025 1043 1060]
+MF5='Very_High_Pressure':'trimf',[1043 1060 1078]
+
+[Input4]
+Name='Cloud'
+Range=[0 10]
+NumMFs=5
+MF1='No_Cloud':'trimf',[-2.5 -2.776e-17 2.5]
+MF2='Few_Clouds':'trimf',[0 2.5 5]
+MF3='Some_Clouds':'trimf',[2.5 5 7.5]
+MF4='Many_Clouds':'trimf',[5 7.5 10]
+MF5='Dark_Sky':'trimf',[7.5 10 12.5]
+
+[Input5]
+Name='Wind'
+Range=[0 40]
+NumMFs=5
+MF1='No_Wind':'trimf',[-10 0 10]
+MF2='Breeze':'trimf',[0 7.28260869565218 20]
+MF3='Windy':'trimf',[10 15.1086956521739 30]
+MF4='Strong_Wind':'trimf',[20 26.6739130434783 40]
+MF5='Very_Strong_Wind':'trimf',[30 40 50]
+
+[Output1]
+Name='Rainfall'
+Range=[0 100]
+NumMFs=5
+MF1='Vey_Low_Chance_of_Rainfall':'trimf',[-25 2.00433369447454 25]
+MF2='Low_Chance_of_Rainfall':'trimf',[0 25 50]
+MF3='Medium_Chance_of_Rain':'trimf',[25 50 75]
+MF4='High_Chance_of_Rain':'trimf',[50 75 100]
+MF5='Very_High_Chance_of_Rain':'trimf',[75 98.8624052004334 125]
+
+[Rules]
+1 1 1 1 1, 1 (1) : 1
+1 1 1 1 2, 1 (1) : 1
+1 1 1 1 3, 1 (1) : 1
+1 1 1 1 4, 1 (1) : 1
+1 1 1 1 5, 1 (1) : 1
+1 1 1 5 1, 2 (1) : 1
+1 1 1 3 1, 2 (1) : 1
+1 1 1 4 1, 3 (1) : 1
+1 1 1 5 4, 3 (1) : 1
+1 1 4 3 3, 4 (1) : 1
+1 1 5 3 3, 4 (1) : 1
+1 1 5 4 5, 4 (1) : 1
+2 3 5 5 5, 5 (1) : 1
+3 3 5 5 5, 5 (1) : 1
+4 3 5 1 5, 1 (1) : 1
+4 3 5 2 5, 2 (1) : 1
+4 3 5 3 5, 3 (1) : 1
+5 3 5 5 5, 4 (1) : 1
+3 3 5 5 4, 5 (1) : 1
+3 3 4 5 4, 4 (1) : 1
+3 3 4 5 5, 5 (1) : 1
+3 3 3 4 5, 3 (1) : 1
+3 2 3 3 3, 3 (1) : 1
+3 1 5 5 4, 2 (1) : 1
+3 1 5 3 4, 2 (1) : 1
+3 2 5 5 5, 3 (1) : 1
+3 3 5 5 1, 3 (1) : 1
+5 1 3 2 2, 1 (1) : 1
+5 1 3 2 3, 2 (1) : 1
+5 1 3 3 3, 2 (1) : 1
+3 1 3 3 3, 2 (1) : 1
+2 0 3 3 2, 3 (1) : 1
+1 3 5 5 5, 5 (1) : 1
+1 3 5 5 4, 5 (1) : 1
+1 3 5 4 4, 4 (1) : 1
+1 3 5 4 5, 5 (1) : 1
+1 3 4 4 3, 3 (1) : 1
+0 3 5 5 5, 5 (1) : 1
+3 3 5 1 1, 2 (1) : 1
+3 3 4 2 1, 2 (1) : 1
+3 3 4 4 3, 2 (1) : 1
+0 0 0 1 1, 1 (1) : 1
+0 3 5 0 0, 5 (1) : 1
+0 3 5 5 5, 5 (1) : 1
+0 3 4 4 4, 4 (1) : 1
+0 2 4 4 4, 3 (1) : 1
+0 2 4 5 5, 4 (1) : 1
+0 2 5 5 5, 4 (1) : 1
+2 3 5 5 5, 4 (1) : 1
+2 3 5 2 2, 3 (1) : 1
+5 3 5 5 5, 5 (1) : 1
+5 3 4 5 5, 5 (1) : 1
+5 2 4 5 5, 4 (1) : 1
